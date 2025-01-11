@@ -1,24 +1,29 @@
 import { useState } from "react";
 import ItemsContainer from "./ItemsContainer";
+import AddItemsContainer from "./AddItemsContainer";
 import "./App.css";
 
 function App() {
-  const [taskList, setTaskList] = useState([
-    { id: 1, task: "Lavar roupa" },
-    { id: 2, task: "Estudar React" },
-    { id: 3, task: "Trabalhar" },
-  ]);
+  const [taskList, setTaskList] = useState([]);
 
-  const removeFromList = (item) => {
-    const newList = [...taskList];
-    const itemIndex = newList.indexOf(item);
-    newList.splice(itemIndex, 1);
+  const removeFromList = (taskToRemove) => {
+    const newList = taskList.filter((task) => task.id !== taskToRemove.id);
     setTaskList(newList);
+  };
+
+  const addToList = (newTask) => {
+    const newTaskObject = {
+      id: Date.now(),
+      task: newTask,
+    };
+
+    setTaskList([...taskList, newTaskObject]);
   };
 
   return (
     <div>
       <h1>Minha lista de tarefas do dia</h1>
+      <AddItemsContainer addToList={addToList} />
       <ItemsContainer taskList={taskList} removeFromList={removeFromList} />
     </div>
   );
