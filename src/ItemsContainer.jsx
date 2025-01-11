@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import TaskItem from "./TaskItem";
 
-const ItemsContainer = ({ taskList }) => {
+const ItemsContainer = ({ taskList, removeFromList }) => {
   return (
     <div>
       {taskList.map((t) => (
-        <TaskItem key={t.id} task={t.task} />
+        <TaskItem key={t.id} task={t.task} removeFromList={removeFromList} />
       ))}
     </div>
   );
@@ -18,6 +18,8 @@ ItemsContainer.propTypes = {
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     })
   ).isRequired,
+  removeFromList: PropTypes.func.isRequired,
+  task: PropTypes.string.isRequired,
 };
 
 export default ItemsContainer;
