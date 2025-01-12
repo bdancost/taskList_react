@@ -1,7 +1,7 @@
-const TaskItem = ({ task, removeFromList }) => {
+const TaskItem = ({ task, removeFromList, showBorderBottom }) => {
   return (
-    <div className="task-item">
-      <p>{task.task}</p>
+    <div className={`task-item ${showBorderBottom ? "bottom-border" : ""}`}>
+      <p>{task}</p>
       <button onClick={() => removeFromList(task)}>Apagar</button>
     </div>
   );

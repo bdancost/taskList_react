@@ -6,18 +6,15 @@ import "./App.css";
 function App() {
   const [taskList, setTaskList] = useState([]);
 
-  const removeFromList = (taskToRemove) => {
-    const newList = taskList.filter((task) => task.id !== taskToRemove.id);
+  const removeFromList = (item) => {
+    const newList = [...taskList];
+    const itemIndex = newList.indexOf(item);
+    newList.splice(itemIndex, 1);
     setTaskList(newList);
   };
 
-  const addToList = (newTask) => {
-    const newTaskObject = {
-      id: Date.now(),
-      task: newTask,
-    };
-
-    setTaskList([...taskList, newTaskObject]);
+  const addToList = (item) => {
+    setTaskList([...taskList, item]);
   };
 
   return (
